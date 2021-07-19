@@ -9,6 +9,9 @@ const Box = styled.div`
   img {
     border-radius: 8px;
   }
+  p {
+    margin-bottom: 12px;
+  }
   .boxLink {
     font-size: 14px;
     color: #2e7bb4;

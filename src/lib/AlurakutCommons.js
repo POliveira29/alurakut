@@ -84,6 +84,7 @@ AlurakutMenu.Wrapper = styled.header`
       font-size: 18px;
     }
     .boxLink {
+      margin-bottom: 10px;
       font-size: 18px;
       color: #2e7bb4;
       -webkit-text-decoration: none;
@@ -98,15 +99,17 @@ AlurakutMenu.Wrapper = styled.header`
     }
   }
   .container {
-    background-color: #308bc5;
-    padding: 7px 16px;
+    position: fixed;
+    width: 100%;
     max-width: 1110px;
     margin: auto;
     display: flex;
     justify-content: space-between;
-    position: relative;
+    padding: 7px 16px;
+    background-color: #308bc5;
     z-index: 101;
     @media (min-width: 860px) {
+      position: relative;
       justify-content: flex-start;
     }
     button {
@@ -291,8 +294,8 @@ export function OrkutNostalgicIconSet(props) {
               className="OrkutNostalgicIconSet__number"
               style={{gridArea: "number"}}
             >
-              {[0, 1, 2].map((_, index) => {
-                const isHeartActive = index <= total - 1;
+              {[0, 1, 2, 3].map((_, index) => {
+                const isHeartActive = index <= total;
                 return (
                   <img
                     key={`orkut__icon_set__${slug}_img_${index}`}

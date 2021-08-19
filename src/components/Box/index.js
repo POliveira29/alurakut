@@ -27,6 +27,20 @@ const Box = styled.div`
     font-weight: 400;
     margin-bottom: 20px;
   }
+  .actionButtons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    .active {
+      color: #fff;
+      background-color: #6f92bb;
+    }
+    button {
+      color: #2e7bb4;
+      background-color: #d9e6f6;
+      border-radius: 8px;
+    }
+  }
   .smallTitle {
     margin-bottom: 20px;
     font-size: 16px;
@@ -53,12 +67,30 @@ const Box = styled.div`
       opacity: 1;
     }
   }
+  textarea {
+    width: 100%;
+    padding: 1rem;
+    resize: none;
+    box-shadow: inset 0px 1px 2px 2px #ccc;
+  }
+  #testimony {
+    border-radius: 4px;
+    box-shadow: none;
+  }
   button {
     border: 0;
     padding: 8px 12px;
     color: #ffffff;
     border-radius: 10000px;
     background-color: #6f92bb;
+  }
+  .info-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background-color: #d9e6f6;
+  }
+  .info-item:nth-child(2n) {
+    background-color: #f1f9fe;
   }
 `;
 

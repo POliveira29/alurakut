@@ -12,8 +12,10 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
   img {
     object-fit: cover;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
+    width: 135px;
+    height: 105px;
     position: relative;
   }
   ul li a {
@@ -48,5 +50,8 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
       z-index: 1;
       background-image: linear-gradient(0deg, #00000073, transparent);
     }
+  }
+  a {
+    font-weight: 600;
   }
 `;

@@ -26,8 +26,8 @@ export function AlurakutMenu({githubUser}) {
         <nav style={{flex: 1}}>
           {[
             {name: "Inicio", slug: "/"},
-            {name: "Amigos", slug: "/amigos"},
-            {name: "Comunidades", slug: "/comunidades"},
+            {name: "Amigos", slug: "/friends"},
+            {name: "Comunidades", slug: "/communities"},
           ].map((menuItem) => (
             <Link
               key={`key__${menuItem.name.toLocaleLowerCase()}`}
@@ -39,7 +39,7 @@ export function AlurakutMenu({githubUser}) {
         </nav>
 
         <nav>
-          <a href={`/logout`}>Sair</a>
+          <a href={`/login`}>Sair</a>
           <div>
             <input placeholder="Pesquisar no Orkut" />
           </div>
@@ -180,9 +180,13 @@ function AlurakutMenuProfileSidebar({githubUser}) {
         />
         <hr />
         <p>
-          <a className="boxLink" href={`/user/${githubUser}`}>
+          <Link
+            className="boxLink"
+            href={`/user/${githubUser}`}
+            target="_blank"
+          >
             @{githubUser}
-          </a>
+          </Link>
         </p>
         <hr />
 
@@ -199,33 +203,33 @@ export function AlurakutProfileSidebarMenuDefault() {
   return (
     <AlurakutProfileSidebarMenuDefault.Wrapper>
       <nav>
-        <a href="/">
+        <Link href="/profile">
           <img src={`${BASE_URL}/icons/user.svg`} />
           Perfil
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/scraps">
           <img src={`${BASE_URL}/icons/book.svg`} />
           Recados
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/">
           <img src={`${BASE_URL}/icons/camera.svg`} />
           Fotos
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/testimony">
           <img src={`${BASE_URL}/icons/sun.svg`} />
           Depoimentos
-        </a>
+        </Link>
       </nav>
       <hr />
       <nav>
-        <a href="/">
+        <Link href="https://github.com/trending" target="_blank">
           <img src={`${BASE_URL}/icons/plus.svg`} />
           GitHub Trends
-        </a>
-        <a href="/logout">
+        </Link>
+        <Link href="/login">
           <img src={`${BASE_URL}//icons/logout.svg`} />
           Sair
-        </a>
+        </Link>
       </nav>
     </AlurakutProfileSidebarMenuDefault.Wrapper>
   );
@@ -254,12 +258,22 @@ export function OrkutNostalgicIconSet(props) {
   return (
     <OrkutNostalgicIconSet.List>
       {[
-        {name: "Recados", slug: "recados", icon: "book"},
-        {name: "Fotos", slug: "fotos", icon: "camera"},
-        {name: "Videos", slug: "videos", icon: "video-camera"},
-        {name: "Fãs", slug: "fas", icon: "star"},
-        {name: "Mensagens", slug: "mensagens", icon: "email"},
-      ].map(({name, slug, icon}) => (
+        {name: "Recados", slug: "recados", icon: "book", qtd: props.scraps},
+        {name: "Fotos", slug: "fotos", icon: "camera", qtd: 0},
+        {
+          name: "Videos",
+          slug: "videos",
+          icon: "video-camera",
+          qtd: 0,
+        },
+        {name: "Fãs", slug: "fas", icon: "star", qtd: 0},
+        {
+          name: "Mensagens",
+          slug: "mensagens",
+          icon: "email",
+          qtd: 0,
+        },
+      ].map(({name, slug, icon, qtd}) => (
         <li key={`orkut__icon_set__${slug}`}>
           <span
             style={{gridArea: "title"}}
@@ -276,7 +290,7 @@ export function OrkutNostalgicIconSet(props) {
               className="OrkutNostalgicIconSet__iconSample"
               src={`https://alurakut.vercel.app/icons/${icon}.svg`}
             />
-            {props[slug] ? props[slug] : 0}
+            {props[slug] ? props[slug] : qtd}
           </span>
         </li>
       ))}
@@ -294,7 +308,7 @@ export function OrkutNostalgicIconSet(props) {
               className="OrkutNostalgicIconSet__number"
               style={{gridArea: "number"}}
             >
-              {[0, 1, 2, 3].map((_, index) => {
+              {[0, 1, 2].map((_, index) => {
                 const isHeartActive = index <= total;
                 return (
                   <img
@@ -428,8 +442,8 @@ const AlurakutLoginScreen = css`
         padding: var(--gutter);
         padding-left: 50px;
         padding-right: 50px;
-        background-color: var(--backgroundSecondary);
         border-radius: var(--commonRadius);
+        background-color: var(--backgroundSecondary);
         flex: 1;
         &:not(:last-child) {
           margin-bottom: var(--gap);
@@ -463,9 +477,17 @@ const AlurakutLoginScreen = css`
           border: 0;
           padding: 12px;
           border-radius: var(--commonRadius);
-          background-color: var(--colorPrimary);
+
           color: var(--textSecondaryColor);
         }
+      }
+      .enabled {
+        background-color: var(--colorPrimary);
+      }
+      .disabled {
+        background-color: #ccc;
+        opacity: 0.7;
+        cursor: not-allowed;
       }
     }
     .footerArea {
@@ -527,6 +549,10 @@ export const AlurakutStyles = css`
     &:focus {
       box-shadow: 0px 0px 5px #33333357;
     }
+  }
+  ul,
+  li {
+    list-style: none;
   }
   ${AlurakutLoginScreen}
 `;

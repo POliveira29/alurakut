@@ -6,12 +6,11 @@ export default async function recebedorRequest(req, res) {
     const client = new SiteClient(TOKEN);
 
     //O ideal seria Validar o dado utilizando o DTO(Data Transfer Object), antes de cadastrar
-
     const criarRegistro = await client.items.create({
-      itemType: "972261", // ID do Model de "Communities" criado pelo Dato
+      itemType: "1061629", // ID do Model de "Scrap" criado pelo Dato
       ...req.body,
     });
-
+    console.log(process.env.NEXT_PUBLIC_SCRAP_MODEL_KEY);
     res.json({
       dados: "Dado",
       criarRegistro: criarRegistro,

@@ -1,5 +1,7 @@
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 import {AlurakutStyles} from "../src/lib/AlurakutCommons";
+import {useState} from "react";
+import LoginContext from "../src/contexts/LoginContext";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -34,11 +36,14 @@ const theme = {
 };
 
 export default function App({Component, pageProps}) {
+  const loginHook = useState("");
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <LoginContext.Provider value={loginHook}>
+          <Component {...pageProps} />
+        </LoginContext.Provider>
       </ThemeProvider>
     </>
   );

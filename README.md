@@ -1,84 +1,98 @@
-# Example app with styled-components
+<h1 align="center">
+    <img alt="Alurakut" title="Alutrakut" src="https://imgur.com/3LOMbPe.png" />
+</h1>
 
-This example features how you use a different styling solution than [styled-jsx](https://github.com/vercel/styled-jsx) that also supports universal styles. That means we can serve the required styles for the first render within the HTML and then load the rest in the client. In this case we are using [styled-components](https://github.com/styled-components/styled-components).
+## 💻 Sobre o projeto
 
-For this purpose we are extending the `<Document />` and injecting the server side rendered styles into the `<head>`, and also adding the `babel-plugin-styled-components` (which is required for server side rendering). Additionally we set up a global [theme](https://www.styled-components.com/docs/advanced#theming) for styled-components using NextJS custom [`<App>`](https://nextjs.org/docs/advanced-features/custom-app) component.
+O Alurakut foi desenvolvido durante a Imersão React da Alura. Inspirada na clássica rede social Orkut, onde é possível criar suas comunidades, enviar scraps e depoimentos para outras pessoas.
 
-## Preview
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+## ⚙️ Funcionalidades
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-styled-components)
+- Login através do usuário github
+- Criar uma comunidade
+- Enviar um recado para outra pessoa
+- Criar um depoimento
+- Listar comunidades de um usuário
+- Listar recados de um usuário
+- Listar depoimentos de um usuário
+- Exibir perfil do usuário logado
+---
 
-## Deploy your own
+## Modificações da aplicação
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+ - [x] Adição de upload de imagem na criação da comunidade
+ - [x] Utilização da API Advice Slip para as frases de conselho do dia
+ - [x] Meta Tags para um melhor SEO
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-styled-components&project-name=with-styled-components&repository-name=with-styled-components)
+## 🎨 Layout
 
-## How to use
+O layout da aplicação está disponível no Figma:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+<a href="https://www.figma.com/file/rwxdgelDrKLGbs0QgaKj62/Alurakut">
+  <img alt="Made by tgmarinho" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
+</a>
+
+---
+
+## 🚀 Como executar o projeto
+
+
+### Pré-requisitos
+
+
+#### 🧭 Rodando a aplicação web (Frontend)
 
 ```bash
-npx create-next-app --example with-styled-components with-styled-components-app
-# or
-yarn create next-app --example with-styled-components with-styled-components-app
+
+# Clone este repositório
+$ git clone https://github.com/POliveira29/alurakut
+
+# Acesse a pasta do projeto no seu terminal/cmd
+$ cd alurakut
+
+# Crie o arquivo .env.local dentro da pasta raiz e coloque as variaveis ambientes da API do cloudinary para o upload de imagens.
+$ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=""
+$ NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=""
+$ NEXT_PUBLIC_CLOUDINARY_KEY=""
+$ CLOUDINARY_SECRET=""
+
+# Instale as dependências
+$ yarn install ou npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ yarn dev
+
+# A aplicação será aberta na porta:3000 - acesse http://localhost:3000
+
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+---
 
-### Try it on CodeSandbox
+## 🛠 Tecnologias
 
-[Open this example on CodeSandbox](https://codesandbox.io/s/github/vercel/next.js/tree/canary/examples/with-styled-components)
+As seguintes ferramentas foram usadas na construção do projeto:
 
-### Notes
+#### **Website**  ([React](https://reactjs.org/)  +  [Next JS](nextjs.org))
 
-When wrapping a [Link](https://nextjs.org/docs/api-reference/next/link) from `next/link` within a styled-component, the [as](https://styled-components.com/docs/api#as-polymorphic-prop) prop provided by `styled` will collide with the Link's `as` prop and cause styled-components to throw an `Invalid tag` error. To avoid this, you can either use the recommended [forwardedAs](https://styled-components.com/docs/api#forwardedas-prop) prop from styled-components or use a different named prop to pass to a `styled` Link.
+-   **[React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)**
+-   **[Styled Components](https://styled-components.com/)**
+-   **[React Hooks](https://pt-br.reactjs.org/docs/hooks-intro.htmlm)**
+-   **[React Context](https://pt-br.reactjs.org/docs/context.html)**
 
-<details>
-<summary>Click to expand workaround example</summary>
-<br />
+#### **APIs** 
 
-**components/StyledLink.js**
+-   **[Cloudinary](https://cloudinary.com/))**
+-   **[Github](https://docs.github.com/pt/rest)**
+-   **[Advice Slip](https://api.adviceslip.com/)**
 
-```javascript
-import Link from 'next/link'
-import styled from 'styled-components'
+#### **CMS** 
+-   **[Dato CMS](https://www.datocms.com/)**
 
-const StyledLink = ({ as, children, className, href }) => (
-  <Link href={href} as={as} passHref>
-    <a className={className}>{children}</a>
-  </Link>
-)
+---
 
-export default styled(StyledLink)`
-  color: #0075e0;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
+## 📝 Licença
 
-  &:hover {
-    color: #40a9ff;
-  }
+Este projeto esta sobe a licença [MIT](./LICENSE).
 
-  &:focus {
-    color: #40a9ff;
-    outline: none;
-    border: 0;
-  }
-`
-```
-
-**pages/index.js**
-
-```javascript
-import StyledLink from '../components/StyledLink'
-
-export default () => (
-  <StyledLink href="/post/[pid]" forwardedAs="/post/abc">
-    First post
-  </StyledLink>
-)
-```
-
-</details>
+Feito por Patrick Oliveira 👋🏽 [Entre em contato!](https://www.linkedin.com/in/patrickoliveira29/)

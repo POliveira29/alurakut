@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from "react";
 import {useRouter} from "next/router";
-import Link from "next/link";
+import NextLink from "next/link";
 import {AlurakutMenu} from "../src/lib/AlurakutCommons";
 import MainGrid from "../src/components/MainGrid";
 import ProfileSidebar from "../src/components/ProfileSidebar";
@@ -10,6 +10,14 @@ import {WrapperList} from "../src/components/WrapperList";
 import LoginContext from "../src/contexts/LoginContext";
 
 export default function Friends() {
+  function Link({href, children, ...props}) {
+    return (
+      <NextLink href={href} passHref>
+        <a {...props}>{children}</a>
+      </NextLink>
+    );
+  }
+
   const githubUser = useContext(LoginContext)[0];
   const [comunidades, setComunidades] = useState([]);
   let {query} = useRouter();

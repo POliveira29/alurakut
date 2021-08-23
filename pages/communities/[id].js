@@ -1,4 +1,5 @@
 import {useContext, useState, useEffect} from "react";
+import {useRouter} from "next/router";
 import {AlurakutMenu} from "../../src/lib/AlurakutCommons";
 import MainGrid from "../../src/components/MainGrid";
 import Box from "../../src/components/Box";
@@ -6,7 +7,9 @@ import LoginContext from "../../src/contexts/LoginContext";
 
 export default function communityPage() {
   const githubUser = useContext(LoginContext)[0];
-  const [comunidades, setComunidades] = useState([]);
+  const [comunidade, setComunidade] = useState([]);
+
+  const router = useRouter();
   useEffect(function () {
     fetch("https://graphql.datocms.com/", {
       method: "POST",
@@ -16,20 +19,17 @@ export default function communityPage() {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: `query {
-          allCommunities{
-            id
-            title
-            imageUrl
-            creatorSlug
+        query: `query MyQuery {
+          community(filter: {id: {eq: ${router.query.id}}}){
+            title,
+            imageUrl,
           }
         }`,
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        const datoComunidades = res.data.allCommunities;
-        setComunidades(datoComunidades);
+        setComunidade(res.data.community);
       })
       .catch((error) => {
         console.log(error);
@@ -41,13 +41,9 @@ export default function communityPage() {
       <AlurakutMenu githubUser={githubUser} />
       <MainGrid>
         <div className="profileArea">
-          <img src={``} alt="Banner Comunidade" />
+          <img src={comunidade.imageUrl} alt="Banner Comunidade" />
           <hr />
-          <p>
-            <a className="boxLink" href={``}>
-              {}
-            </a>
-          </p>
+          <p>{comunidade.title}</p>
         </div>
         <Box></Box>
       </MainGrid>

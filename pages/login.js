@@ -63,13 +63,6 @@ export default function LoginPage() {
                     path: "/",
                     maxAge: 86400 * 7,
                   });
-
-                  // const token = dadosDaResposta.token;
-
-                  // nookies.set(null, "USER_TOKEN", token, {
-                  //   path: "/",
-                  //   maxAge: 86400 * 7,
-                  // });
                   router.push("/");
                   return;
                 }
@@ -127,33 +120,32 @@ export default function LoginPage() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const cookies = nookies.get(context);
-  const token = cookies.USER_TOKEN;
-  // Destruction
-  const {githubUser} = jwt.decode(token);
+// export async function getServerSideProps(context) {
+//   const cookies = nookies.get(context);
+//   const token = cookies.token;
+//   // Destruction
+//   const {githubUser} = jwt.decode(token);
 
-  const {isAuthenticated} = await fetch(
-    "https://alurakut.vercel.app/api/auth",
-    {
-      headers: {
-        Authorization: token,
-      },
-    }
-  ).then((resposta) => resposta.json());
-  console.log(isAuthenticated);
-  if (!isAuthenticated) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+//   const {isAuthenticated} = await fetch(
+//     "https://alurakut.vercel.app/api/auth",
+//     {
+//       headers: {
+//         Authorization: token,
+//       },
+//     }
+//   ).then((res) => res.json());
+//   if (!isAuthenticated) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      githubUser: githubUser,
-    }, // will be passed to the page component as props
-  };
-}
+//   return {
+//     props: {
+//       githubUser: githubUser,
+//     }, // will be passed to the page component as props
+//   };
+// }

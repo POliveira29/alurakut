@@ -5,6 +5,8 @@ import {CircularProgress} from "@material-ui/core";
 import {BsUpload} from "react-icons/bs";
 import {Image} from "cloudinary-react";
 import axios from "axios";
+import nookies from "nookies";
+import jwt from "jsonwebtoken";
 
 //Components
 import {AlurakutMenu, OrkutNostalgicIconSet} from "../src/lib/AlurakutCommons";
@@ -18,6 +20,7 @@ import WidgetScrap from "../src/components/WidgetScrap";
 import {ScrapList} from "../src/components/ScrapList";
 import WidgetTestimony from "../src/components/WidgetTestimony";
 import LoginContext from "../src/contexts/LoginContext";
+import {useAuth} from "../src/hooks/useAuth";
 
 export default function Home(props) {
   // const githubUser = props.githubUser;
@@ -376,4 +379,27 @@ export default function Home(props) {
       </MainGrid>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const userToken = await nookies.get(context).token;
+
+  const isAuthenticated = await useAuth(userToken);
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanet: false,
+      },
+    };
+  }
+
+  const {githubUser} = jwt.decode(userToken);
+
+  return {
+    props: {
+      githubUser: githubUser,
+    },
+  };
 }

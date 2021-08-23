@@ -38,9 +38,6 @@ O layout da aplicação está disponível no Figma:
 ## 🚀 Como executar o projeto
 
 
-### Pré-requisitos
-
-
 #### 🧭 Rodando a aplicação web (Frontend)
 
 ```bash
@@ -82,7 +79,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **APIs** 
 
--   **[Cloudinary](https://cloudinary.com/))**
+-   **[Cloudinary](https://cloudinary.com/)**
 -   **[Github](https://docs.github.com/pt/rest)**
 -   **[Advice Slip](https://api.adviceslip.com/)**
 
